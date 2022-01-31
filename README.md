@@ -10,7 +10,6 @@ This is a weather app that pulls weather data from Openweather.org and displays 
 - CSS
 - JavaScript
 - GitHub
-- Netlify
 - Node js
 - Express js
 
