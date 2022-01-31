@@ -17,9 +17,12 @@ const https = require('https');
         //get the temperature in Celsius only
         temp = weatherData.main.temp
         console.log(temp);
-
+        //get the name of the city
         city = weatherData.name;
         console.log(city);
+        //get the description of the weather 
+        desc = weatherData.weather[0].description;
+        console.log(desc);
     });
 
     }).on('error', (e) => {
