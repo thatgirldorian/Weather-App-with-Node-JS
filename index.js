@@ -1,9 +1,6 @@
 //add some code that allows us to create a server and use Express js
 const express = require('express')
 
-//require body parser
-var bodyParser = require('body-parser')
-
 //use HTTPS module to make api request to the OpenWeather app (make a Get request to external server)
 const https = require('https');
 
@@ -14,6 +11,15 @@ const https = require('https');
 
     res.on('data', (d) => {
         process.stdout.write(d);
+        //add this to parse our JSON data and make it readable
+        const weatherData = JSON.parse(d);
+        console.log(weatherData)
+        //get the temperature in Celsius only
+        temp = weatherData.main.temp
+        console.log(temp);
+
+        city = weatherData.name;
+        console.log(city);
     });
 
     }).on('error', (e) => {
@@ -21,7 +27,7 @@ const https = require('https');
     });
 
 
-//get the app to use the packages
+//get the app to use the packages & body parser
 const app = express()
 const port = 3000
 
