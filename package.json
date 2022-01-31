@@ -1,0 +1,23 @@
+{
+  "name": "weather-app-with-node-js",
+  "version": "1.0.0",
+  "description": "A weather app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thatgirldorian/Weather-App-with-Node-JS.git"
+  },
+  "author": "D. Otuagomah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thatgirldorian/Weather-App-with-Node-JS/issues"
+  },
+  "homepage": "https://github.com/thatgirldorian/Weather-App-with-Node-JS#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2"
+  }
+}
