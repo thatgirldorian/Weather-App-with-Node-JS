@@ -23,6 +23,19 @@ const https = require('https');
         //get the description of the weather 
         desc = weatherData.weather[0].description;
         console.log(desc);
+        //add corresponding weather icon
+        icon = weatherData.weather[0].icon;
+        const imageUrl = "http://openweathermap.org/img/wn/" + icon + "@4x" + ".png"
+        console.log(icon);
+
+        //render this data onto our webpage
+        app.get('/', function(req, res) {
+            res.write(`<p>Hey, the temperature in ${city} is ${temp} celsius today.</p>`);
+            res.write(`<h2>The weather is currently ${desc}.</h2>`);
+            res.write("<img src='" + imageUrl + "'>");
+            res.send();
+            })
+        
     });
 
     }).on('error', (e) => {
@@ -34,10 +47,6 @@ const https = require('https');
 const app = express()
 const port = 3000
 
-//create a get request that responds with the index.html file
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html')
-})
 
 //this starts up the localhost 3000 on our local machine
 app.listen(port, () => {
