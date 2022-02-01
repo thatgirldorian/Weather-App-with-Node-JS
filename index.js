@@ -24,7 +24,7 @@ app.post('/', function(req, res) {
     //call the get method on the server to use the API endpoint
     //create a variable to hold the city name to be typed in 
     const cityQuery = req.body.cityName;
-    const apiKey = "4d7f1f6171fc173b7dd95c78d126bad0"
+    const apiKey = "insert apiKey"
     const unit = "metric"
 
     https.get('https://api.openweathermap.org/data/2.5/weather?q=' + cityQuery + '&appid=' + apiKey + '&units=' + unit, (response) => {
