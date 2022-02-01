@@ -5,6 +5,7 @@ This is a weather app that pulls weather data from Openweather.org and displays 
 
 
 <h3>Technology Used:</h3>
+
 - HTML
 - JavaScript
 - GitHub
@@ -13,7 +14,7 @@ This is a weather app that pulls weather data from Openweather.org and displays 
 - OpenWeather API
 
 
-<h3>Screenshot:</h3>
+<h3>Screenshots:</h3>
 <img width="684" alt="Screenshot 2022-02-01 at 9 38 17 AM" src="https://user-images.githubusercontent.com/40691059/151929782-5cbd19ac-7185-4735-8c00-2d04ec6dbdc2.png">
 
 <img width="681" alt="Screenshot 2022-02-01 at 9 39 02 AM" src="https://user-images.githubusercontent.com/40691059/151929788-d1ccc34a-a557-4123-bc7c-78332337c27b.png">
