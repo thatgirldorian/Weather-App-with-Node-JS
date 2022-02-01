@@ -4,49 +4,55 @@ const express = require('express')
 //use HTTPS module to make api request to the OpenWeather app (make a Get request to external server)
 const https = require('https');
 
-//call the get method on the server to use the API endpoint
-    https.get('https://api.openweathermap.org/data/2.5/weather?q=Dubai&appid=4d7f1f6171fc173b7dd95c78d126bad0&units=metric', (res) => {
-    console.log('statusCode:', res.statusCode);
-    console.log('headers:', res.headers);
-
-    res.on('data', (d) => {
-        process.stdout.write(d);
-        //add this to parse our JSON data and make it readable
-        const weatherData = JSON.parse(d);
-        console.log(weatherData)
-        //get the temperature in Celsius only
-        temp = weatherData.main.temp
-        console.log(temp);
-        //get the name of the city
-        city = weatherData.name;
-        console.log(city);
-        //get the description of the weather 
-        desc = weatherData.weather[0].description;
-        console.log(desc);
-        //add corresponding weather icon
-        icon = weatherData.weather[0].icon;
-        const imageUrl = "http://openweathermap.org/img/wn/" + icon + "@4x" + ".png"
-        console.log(icon);
-
-        //render this data onto our webpage
-        app.get('/', function(req, res) {
-            res.write(`<p>Hey, the temperature in ${city} is ${temp} celsius today.</p>`);
-            res.write(`<h2>The weather is currently ${desc}.</h2>`);
-            res.write("<img src='" + imageUrl + "'>");
-            res.send();
-            })
-        
-    });
-
-    }).on('error', (e) => {
-    console.error(e);
-    });
+//use bodyParser to fetch the data from the server
+const bodyParser = require('body-parser')
 
 
 //get the app to use the packages & body parser
 const app = express()
+app.use(bodyParser.urlencoded({extended: true}));
 const port = 3000
 
+//render this data onto our webpage
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + "/index.html")
+    })
+
+//this sends the data from our form to our server
+app.post('/', function(req, res) {
+
+    //call the get method on the server to use the API endpoint
+    //create a variable to hold the city name to be typed in 
+    const cityQuery = req.body.cityName;
+    const apiKey = "4d7f1f6171fc173b7dd95c78d126bad0"
+    const unit = "metric"
+
+    https.get('https://api.openweathermap.org/data/2.5/weather?q=' + cityQuery + '&appid=' + apiKey + '&units=' + unit, (response) => {
+    console.log('statusCode:', res.statusCode);
+    console.log('headers:', res.headers);
+
+    response.on('data', (d) => {
+        process.stdout.write(d);
+        //add this to parse our JSON data and make it readable
+        const weatherData = JSON.parse(d);
+        //get the temperature in Celsius only
+        const temp = weatherData.main.temp
+        //get the name of the city
+        const city = weatherData.name;
+        //get the description of the weather 
+        const desc = weatherData.weather[0].description;
+        //add corresponding weather icon
+        const icon = weatherData.weather[0].icon;
+        const imageUrl = "http://openweathermap.org/img/wn/" + icon + "@4x" + ".png" 
+
+        res.write(`<p>Hey, the weather is currently ${desc}.</p>`);
+        res.write(`<h2>The temperature in ${city} is ${temp} degrees celsius today.</h2>`);
+        res.write("<img src='" + imageUrl + "'>");
+        res.send();
+        });
+
+    })
+})
 
 //this starts up the localhost 3000 on our local machine
 app.listen(port, () => {
