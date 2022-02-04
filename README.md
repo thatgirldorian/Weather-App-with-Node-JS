@@ -11,7 +11,7 @@ This is a weather app that pulls weather data from Openweather.org and displays 
 - GitHub
 - Node js
 - Express js
-- OpenWeather API
+- The OpenWeather API
 
 
 <h3>Screenshots:</h3>
