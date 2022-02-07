@@ -11,7 +11,7 @@ const bodyParser = require('body-parser')
 //get the app to use the packages & body parser
 const app = express()
 app.use(bodyParser.urlencoded({extended: true}));
-const port = 3000
+const port = process.env.PORT || 3000
 
 //render this data onto our webpage
 app.get('/', function(req, res) {
@@ -22,7 +22,7 @@ app.get('/', function(req, res) {
 app.post('/', function(req, res) {
 
     //call the get method on the server to use the API endpoint
-    //create a variable to hold the city name to be typed in 
+    //create a variable to hold the city name to be typed in
     const cityQuery = req.body.cityName;
     const apiKey = "insert apiKey"
     const unit = "metric"
@@ -39,11 +39,11 @@ app.post('/', function(req, res) {
         const temp = weatherData.main.temp
         //get the name of the city
         const city = weatherData.name;
-        //get the description of the weather 
+        //get the description of the weather
         const desc = weatherData.weather[0].description;
         //add corresponding weather icon
         const icon = weatherData.weather[0].icon;
-        const imageUrl = "http://openweathermap.org/img/wn/" + icon + "@4x" + ".png" 
+        const imageUrl = "http://openweathermap.org/img/wn/" + icon + "@4x" + ".png"
 
         res.write(`<p>Hey, the weather is currently ${desc}.</p>`);
         res.write(`<h2>The temperature in ${cityQuery} is ${temp} degrees celsius today.</h2>`);
